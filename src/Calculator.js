@@ -78,12 +78,7 @@ function Calculator() {
             }
         };
 
-        const testCalc = (e) => {
-            console.log(useState)
-            console.log([calc, setCalc])
-            console.log(calc)
 
-        }
 
         return (
             <div>
@@ -92,7 +87,7 @@ function Calculator() {
                     <div>{
                             digits.map((btn,i) =>
                                     <AmazingNumberButton key={i} num={btn} className ="button" value={btn}
-                                                         onClick={ function(e){ numClickHandler(e);testCalc(e);} }
+                                                         onClick={ function(e){ numClickHandler(e);} }
                                     />
                             )
                     }
@@ -100,7 +95,7 @@ function Calculator() {
                     <div>{
                             btns.map((sign,i) =>
                                     <GreatOperationButton key={i} className ="button" signVal={sign}
-                                                          onClick={ function(e){ signClickHandler(e);testCalc(e);} }
+                                                          onClick={ function(e){ signClickHandler(e);} }
                                     />
                             )
                     }
@@ -108,7 +103,7 @@ function Calculator() {
                     <div>{
                             equalSign.map((eq,i) =>
                                 <MagnificientEqualButton key={i} className ="equal" equalSign={eq}
-                                                         onClick={ function(e){ equalClickHandler(e);testCalc(e);} }
+                                                         onClick={ function(e){ equalClickHandler(e);} }
                                 />
                             )
                     }
