@@ -10,26 +10,32 @@ import MagnificientEqualButton from "./MagnificientEqualButton";
 
 function Calculator() {
 
-        const number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+        const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         const btns = ["+", "-", "/", "*"]
         const equal = "="
 
-        const [res, setScreen] = useState('');
-        const [num, setNum] = useState('');
+        let [calc, setCalc] = useState({
+            sign: "",
+            num: 0,
+            res: 0,
+        });
 
-        function handleSetScreen(val){
-                setScreen(val);
-        }
-
-        function seNum(num){
-                console.log(num)
+        const numClickHandler = (e) => {
+            const numVal = e.target.innerHTML;
         }
 
         return (
             <div>
                 <TheTitle />
-                <BeautifulScreen screen = {res} />
-                <AmazingNumberButton numbers = {number} onClick={ (e) => setNum(e.target.value) }  />
+                <BeautifulScreen screen = {calc.num ? calc.num : calc.res} />
+                    <div>{
+                            digits.map((btn,i) =>
+                                    <AmazingNumberButton key={i} num={btn} className ="button" value={btn}
+                                                         onClick={numClickHandler}
+                                    />
+                            )
+                    }
+                    </div>
                 <GreatOperationButton operator = {btns} />
                 <MagnificientEqualButton myeq = {equal} />
             </div>

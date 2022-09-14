@@ -1,33 +1,13 @@
 import './AmazingNumberButton.css';
 import './TheTitle.css';
-import React, { useState } from 'react';
 
 
-function Number(props) {
-
-    const num = props.numbers;
-
-    const digits = num.map((props) =>
-        <button name={props} key={props} value={props} className="button">{props}</button>
-    );
-
+const AmazingNumberButton = ({ btn, num, className, onClick}) => {
     return (
-        digits
+        <button className={className} value={btn} onClick={onClick}>
+           {num}
+        </button>
     )
-}
-
-
-
-function AmazingNumberButton(props) {
-
-
-        return (
-           <div className="d-Flex">
-                <div className="myButtons">
-                   <Number {...props} />
-                </div>
-           </div>
-       )
 }
 
 export default AmazingNumberButton;

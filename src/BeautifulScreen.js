@@ -2,16 +2,13 @@ import './BeautifulScreen.css';
 import './TheTitle.css';
 
 
-function BeautifulScreen(props) {
-
-    let show = props.screen
-
-
+const BeautifulScreen = ({screen}) => {
     return (
-        <div className="d-Flex">
-            <div className="screen">{show}</div>
-        </div>
+            <div className="screen">
+                <h1>{screen}</h1>
+            </div>
     )
 }
+
 
 export default BeautifulScreen;
