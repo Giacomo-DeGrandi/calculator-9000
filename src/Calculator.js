@@ -1,5 +1,7 @@
 
 import React, { useState } from 'react';
+import './Calculator.css';
+
 
 import TheTitle from './TheTitle';
 import BeautifulScreen from "./BeautifulScreen";
@@ -79,35 +81,56 @@ function Calculator() {
         };
 
 
+        const resetClick = () => {
+            setCalc({
+                ...calc,
+                sign: "",
+                num: 0,
+                res: 0,
+            });
+        };
 
         return (
             <div>
                 <TheTitle />
                 <BeautifulScreen numVal = {calc.num ? calc.num : calc.res} />
-                    <div>{
-                            digits.map((btn,i) =>
-                                    <AmazingNumberButton key={i} num={btn} className ="button" value={btn}
-                                                         onClick={ function(e){ numClickHandler(e);} }
+
+                        <div>
+                            {
+                                digits.map( (btn,i) =>
+                                        <AmazingNumberButton key={i} num={btn} className ="button" value={btn}
+                                                             onClick={ function(e){ numClickHandler(e);} }
+                                        />
+                                )
+                            }
+                        </div>
+
+                        <div>
+                            {
+                                btns.map( (sign,i) =>
+                                        <GreatOperationButton key={i} className ="button" signVal={sign}
+                                                              onClick={ function(e){ signClickHandler(e);} }
+                                        />
+                                )
+                            }
+                        </div>
+
+                        <div>
+                            {
+                                equalSign.map( (eq,i) =>
+                                    <MagnificientEqualButton key={i} className ="equal" equalSign={eq}
+                                                             onClick={ function(e){ equalClickHandler(e);} }
                                     />
-                            )
-                    }
-                    </div>
-                    <div>{
-                            btns.map((sign,i) =>
-                                    <GreatOperationButton key={i} className ="button" signVal={sign}
-                                                          onClick={ function(e){ signClickHandler(e);} }
-                                    />
-                            )
-                    }
-                    </div>
-                    <div>{
-                            equalSign.map((eq,i) =>
-                                <MagnificientEqualButton key={i} className ="equal" equalSign={eq}
-                                                         onClick={ function(e){ equalClickHandler(e);} }
-                                />
-                            )
-                    }
-                    </div>
+                                )
+                            }
+                        </div>
+
+                        <div>
+                            <button className ="equal"
+                                    onClick={ function(e){ resetClick(e);} }>
+                            CE
+                            </button>
+                        </div>
 
             </div>
         )
