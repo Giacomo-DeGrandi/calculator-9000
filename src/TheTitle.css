@@ -1,0 +1,14 @@
+body {
+    background-color: dimgray;
+    color: white;
+}
+
+.my-h1 {
+    text-align: center;
+}
+
+.d-Flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

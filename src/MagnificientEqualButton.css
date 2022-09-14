@@ -1,0 +1,11 @@
+
+.equal {
+    color: black;
+    padding: 3vh;
+    font-size: 4em;
+    border: solid 1px white;
+    border-radius: 1vh;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    background-color: white;
+
+}
