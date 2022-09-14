@@ -1,5 +1,4 @@
 import './GreatOperationButton.css';
-import './TheTitle.css';
 
 
 const GreatOperationButton = ({signVal, className, onClick}) => {

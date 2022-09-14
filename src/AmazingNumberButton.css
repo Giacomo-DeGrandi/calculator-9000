@@ -8,10 +8,29 @@
     flex-wrap: wrap;
 }
 
+.wrap {
+    flex-wrap: wrap;
+}
+
 .button {
-    padding: 3vh;
-    font-size: 4em;
+    width: 12vh;
+    margin-top:1vh;
+    color: black;
+    padding: 4vh;
+    font-size: 2em;
     border: solid 1px white;
-    border-radius: 1vh;
+    border-radius: 5vh;
+    background-color: #F6F6F6;
     box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
 }
+
+
+
+.d-flex{
+    display:flex;
+}
+.center{
+    justify-content: center;
+    align-items: center;
+}
+

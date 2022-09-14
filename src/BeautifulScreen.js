@@ -1,12 +1,13 @@
 import './BeautifulScreen.css';
-import './TheTitle.css';
 
 
 const BeautifulScreen = ({numVal}) => {
     return (
+        <div className="d-flex center">
             <div className="screen">
-                <h1>{numVal}</h1>
+                    {numVal}
             </div>
+        </div>
     )
 }
 
