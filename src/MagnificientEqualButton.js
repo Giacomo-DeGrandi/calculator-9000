@@ -2,14 +2,12 @@
 import './MagnificientEqualButton.css';
 import './TheTitle.css';
 
-function MagnificientEqualButton(props) {
-    const eq = props.myeq
+
+const MagnificientEqualButton = ({equalSign, className, onClick}) => {
     return (
-        <div className="d-Flex">
-            <button className="equal" value={eq} name={eq}>
-                {eq}
-            </button>
-        </div>
+        <button className={className} value={equalSign} onClick={onClick}>
+            {equalSign}
+        </button>
     )
 }
 

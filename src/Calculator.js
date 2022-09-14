@@ -12,32 +12,108 @@ function Calculator() {
 
         const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         const btns = ["+", "-", "/", "*"]
-        const equal = "="
+        const equalSign = ["="]
+
 
         let [calc, setCalc] = useState({
-            sign: "",
-            num: 0,
-            res: 0,
+                sign: "",
+                num: 0,
+                res: 0,
         });
 
+        const signClickHandler = (e) => {
+
+            e.preventDefault();
+            const signVal = e.target.innerHTML;
+            console.log(calc)
+
+            setCalc({
+                ...calc,
+                sign: signVal,
+                res: !calc.res && calc.num ? calc.num : calc.res,
+                num: 0,
+            });
+        };
+
+
         const numClickHandler = (e) => {
+
             const numVal = e.target.innerHTML;
+
+            setCalc({
+                ...calc,
+                num:
+                    calc.num === 0 && numVal === "0"
+                        ? "0"
+                        : calc.num % 1 === 0 ?
+                            parseInt(calc.num + numVal)
+                            : calc.num + numVal,
+
+                res: !calc.sign ? 0 : calc.res,
+            });
+        }
+
+        const equalClickHandler = () => {
+            if (calc.sign && calc.num) {
+                const calculate = (a, b, sign) => {
+                    if (sign === "+") {
+                        return a + b;
+                    } else if (sign === "-") {
+                        return a - b;
+                    } else if (sign === "*") {
+                        return a * b;
+                    } else if (sign === "/") {
+                        return a / b;
+                    }
+                }
+
+                setCalc({
+                    ...calc,
+                    res: calc.num === "0" && calc.sign === "/"
+                            ? "Can't divide with 0"
+                            :  calculate( parseInt(calc.res),  parseInt(calc.num),  calc.sign),
+                    sign: "",
+                    num: 0,
+                });
+            }
+        };
+
+        const testCalc = (e) => {
+            console.log(useState)
+            console.log([calc, setCalc])
+            console.log(calc)
+
         }
 
         return (
             <div>
                 <TheTitle />
-                <BeautifulScreen screen = {calc.num ? calc.num : calc.res} />
+                <BeautifulScreen numVal = {calc.num ? calc.num : calc.res} />
                     <div>{
                             digits.map((btn,i) =>
                                     <AmazingNumberButton key={i} num={btn} className ="button" value={btn}
-                                                         onClick={numClickHandler}
+                                                         onClick={ function(e){ numClickHandler(e);testCalc(e);} }
                                     />
                             )
                     }
                     </div>
-                <GreatOperationButton operator = {btns} />
-                <MagnificientEqualButton myeq = {equal} />
+                    <div>{
+                            btns.map((sign,i) =>
+                                    <GreatOperationButton key={i} className ="button" signVal={sign}
+                                                          onClick={ function(e){ signClickHandler(e);testCalc(e);} }
+                                    />
+                            )
+                    }
+                    </div>
+                    <div>{
+                            equalSign.map((eq,i) =>
+                                <MagnificientEqualButton key={i} className ="equal" equalSign={eq}
+                                                         onClick={ function(e){ equalClickHandler(e);testCalc(e);} }
+                                />
+                            )
+                    }
+                    </div>
+
             </div>
         )
 }

@@ -2,21 +2,15 @@ import './GreatOperationButton.css';
 import './TheTitle.css';
 
 
-
-function GreatOperationButton(props) {
-
-    const ope = props.operator;
+const GreatOperationButton = ({signVal, className, onClick}) => {
     return (
-        <div className="d-Flex">
-            <div className="myButtons-op">
-                {
-                    ope.map(props => (
-                    <button className="button-op" value={props} key={props} name={props} > {props} </button>
-                ))}
-            </div>
-        </div>
+        <button className ={className} value={signVal}
+                onClick={onClick}>
+            {signVal}
+        </button>
     )
 }
+
 
 
 export default GreatOperationButton;

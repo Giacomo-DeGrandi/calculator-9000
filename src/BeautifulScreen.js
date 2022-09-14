@@ -2,10 +2,10 @@ import './BeautifulScreen.css';
 import './TheTitle.css';
 
 
-const BeautifulScreen = ({screen}) => {
+const BeautifulScreen = ({numVal}) => {
     return (
             <div className="screen">
-                <h1>{screen}</h1>
+                <h1>{numVal}</h1>
             </div>
     )
 }
