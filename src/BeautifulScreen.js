@@ -4,7 +4,7 @@ import './BeautifulScreen.css';
 const BeautifulScreen = ({numVal}) => {
     return (
         <div className="d-flex center">
-            <div className="screen">
+            <div className="screen" id="myScreen">
                     {numVal}
             </div>
         </div>

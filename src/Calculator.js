@@ -1,5 +1,5 @@
+import React, {useEffect, useState} from 'react';
 
-import React, { useState, useEffect } from 'react';
 
 
 import TheTitle from './TheTitle';
@@ -7,6 +7,7 @@ import BeautifulScreen from "./BeautifulScreen";
 import AmazingNumberButton from "./AmazingNumberButton";
 import GreatOperationButton from "./GreatOperationButton";
 import MagnificientEqualButton from "./MagnificientEqualButton";
+
 
 import ItsOverNineThousand from "./ItsOverNineThousand";
 
@@ -18,11 +19,16 @@ function Calculator() {
         const equalSign = ["="]
 
 
-        let [calc, setCalc] = useState({
+        // UseSTATE ------------------------------------>
+
+         let [calc, setCalc] = useState({
                 sign: "",
                 num: 0,
                 res: 0,
         });
+
+
+        // MYCONSTANTS -------------------------------->
 
         const signClickHandler = (e) => {
 
@@ -57,6 +63,7 @@ function Calculator() {
         }
 
         const equalClickHandler = () => {
+
             if (calc.sign && calc.num) {
                 const calculate = (a, b, sign) => {
                     if (sign === "+") {
@@ -78,6 +85,8 @@ function Calculator() {
                     sign: "",
                     num: 0,
                 });
+
+
             }
         };
 
@@ -92,6 +101,44 @@ function Calculator() {
         };
 
 
+        const collectCount = (e) => {
+            let secondNum = document.querySelector("#num1").innerHTML
+            let sign = document.querySelector("#sign").innerHTML
+            let firstNum = document.querySelector("#num2").innerHTML
+
+            let compCalc = firstNum + ' ' + sign + ' ' + secondNum + ' = '
+
+            let calcData = new FormData();
+
+            calcData.append('calcSave', compCalc );
+
+            fetch("http://localhost:8080/save.php", {
+                method: 'POST',
+                body: calcData,
+                mode: 'cors',
+                redirect: 'follow',
+                headers : {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;application/json',
+                    'Accept': 'application/x-www-form-urlencoded; charset=UTF-8;application/json'
+                }
+
+            })
+                .then(r => r.json())
+                .then(d => {
+                    console.log(d)
+                })
+
+        }
+
+
+        const saveCalc = (e) => {
+            let compCalc = document.querySelector("#myScreen").innerHTML
+             console.log(compCalc)
+        }
+
+        // UseEFFECT ------------------------------------>
+
+
         useEffect(() => {
             if (calc.res) {
                 if(parseInt(calc.res) > 9000){
@@ -103,6 +150,7 @@ function Calculator() {
                 }
             }
         });
+
 
 
     // CSS    ----------------------->
@@ -128,6 +176,16 @@ function Calculator() {
     const P2 = {
         padding: "2.5vh"
     }
+    const Reminder = {
+        marginTop:"15vh",
+        width: "15vh",
+        textAlign: "center",
+        border: "solid 1px white",
+        fontSize: "2em",
+        padding: "2.5vh",
+        marginLeft:"4vh"
+
+    }
 
     const ceBtn = {
         textAlign: "center",
@@ -135,6 +193,21 @@ function Calculator() {
         marginTop:"1vh",
         marginRight:"1vh",
         color: "#FF312E",
+        padding: "4vh",
+        fontSize: "2em",
+        border: "solid 1px white",
+        borderRadius: "5vh",
+        backgroundColor:" white",
+        boxShadow: "rgba(100, 100, 111, 0.2) 0 7px 29px 0"
+    }
+
+    const saveBtn = {
+        textAlign: "center",
+        width: "50vh",
+        marginTop:"8vh",
+        marginLeft:"4vh",
+        marginRight:"4vh",
+        color: "purple",
         padding: "4vh",
         fontSize: "2em",
         border: "solid 1px white",
@@ -158,64 +231,108 @@ function Calculator() {
 
     const nineTh = {
         color: "#FF312E",
-        fontSize: "4em",
+        padding: "2vh",
+        fontSize: "3em",
         textAlign: "center",
         textShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
         display: "none"
     }
 
 
+    const mainFlex = {
+        display: "flex"
+    }
+
+    const remFlex = {
+        display: "flex"
+    }
+
+    const colFlex = {
+        flexDirection: "column"
+    }
+
+    let myNum;
+
+
+
      // RETURN    ----------------------->
 
 
         return (
-            <div style={mainWrapper}>
-                <div id="divvi" style={nineTh}>
-                    <ItsOverNineThousand />
-                </div>
+            <div style={mainFlex}>
+
                 <div>
-                    <TheTitle />
-                     <BeautifulScreen numVal = {calc.num ? calc.num : calc.res} />
-                        <div style={Container}>
-
-                            {
-                                btns.map( (sign,i) =>
-                                    <span style={P1}>
-                                    <GreatOperationButton key={i} className ="button-op" signVal={sign}
-                                                          onClick={ function(e){ signClickHandler(e);} }
-                                    />
-                                    </span>
-                                )
-                            }
-
-                           {
-                               digits.map( (btn,i) =>
-                                   <span style={P1}>
-                                       <AmazingNumberButton key={i} num={btn} className ="button" value={btn}
-                                                            onClick={ function(e){ numClickHandler(e);} }
-                                       />
-                                   </span>
-                               )
-                           }
-
-                            <button style ={ceBtn}
-                                    onClick={ function(e){ resetClick(e);} }>
-                                CE
-                            </button>
-
-                            {
-                                equalSign.map( (eq,i) =>
-                                    <MagnificientEqualButton key={i} className ="button-eq" equalSign={eq}
-                                                             onClick={ function(e){ equalClickHandler(e);} }
-                                    />
-                                )
-                            }
-
-
+                    <div style={mainWrapper}>
+                        <div id="divvi" style={nineTh}>
+                            <ItsOverNineThousand />
                         </div>
+                        <div>
+                            <TheTitle />
+                        </div>
+                        <div>
+                             <BeautifulScreen numVal = {calc.num ? calc.num : calc.res} />
+                                <div style={Container}>
+
+                                    {
+                                        btns.map( (sign,i) =>
+                                            <span style={P1}>
+                                            <GreatOperationButton key={i} className ="button-op" signVal={sign}
+                                                                  onClick={ function(e){ signClickHandler(e); } }
+                                            />
+                                            </span>
+                                        )
+                                    }
+
+                                   {
+                                       digits.map( (btn,i) =>
+                                           <span style={P1}>
+                                               <AmazingNumberButton key={i} num={btn} className ="button" value={btn}
+                                                                    onClick={ function(e){ numClickHandler(e); } }
+                                               />
+                                           </span>
+                                       )
+                                   }
+
+                                    <button style ={ceBtn}
+                                            onClick={ function(e){ resetClick(e); } }>
+                                        CE
+                                    </button>
+
+                                    {
+                                        equalSign.map( (eq,i) =>
+                                            <MagnificientEqualButton key={i} className ="button-eq" equalSign={eq}
+                                                                     onClick={ function(e){ equalClickHandler(e); collectCount(e); } }
+                                            />
+                                        )
+                                    }
+
+
+                                </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div style={colFlex}>
+
+                    <div style={remFlex}>
+                        <h1 style={Reminder} id="num2"> {calc.res} </h1>
+                        <h1 style={Reminder} id="sign"> {calc.sign} </h1>
+                        <h1 style={Reminder} id="num1"> {calc.num} </h1>
+                    </div>
+
+                    <div>
+                        <button type="submit" name="save" style ={saveBtn} onClick={function(e){ saveCalc( e );  } } >
+                            SAVE
+                        </button>
+                    </div>
+
                 </div>
 
             </div>
+
         )
 }
 

@@ -3,7 +3,7 @@
 const ItsOverNineThousand = () => {
     return (
         <div>
-            Its Over 9000 Thousand !!!
+            Its Over 9000 !!!
         </div>
     )
 }
