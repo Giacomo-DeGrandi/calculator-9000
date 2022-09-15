@@ -112,11 +112,9 @@ function Calculator() {
 
             calcData.append('calcSave', compCalc );
 
-            fetch("http://localhost:8080/save.php", {
+            fetch("http://localhost:8000/save.php", {
                 method: 'POST',
                 body: calcData,
-                mode: 'cors',
-                redirect: 'follow',
                 headers : {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;application/json',
                     'Accept': 'application/x-www-form-urlencoded; charset=UTF-8;application/json'
@@ -178,7 +176,6 @@ function Calculator() {
     }
     const Reminder = {
         marginTop:"15vh",
-        width: "15vh",
         textAlign: "center",
         border: "solid 1px white",
         fontSize: "2em",
@@ -251,7 +248,6 @@ function Calculator() {
         flexDirection: "column"
     }
 
-    let myNum;
 
 
 
@@ -286,7 +282,7 @@ function Calculator() {
                                    {
                                        digits.map( (btn,i) =>
                                            <span style={P1}>
-                                               <AmazingNumberButton key={i} num={btn} className ="button" value={btn}
+                                               <AmazingNumberButton key={i*2} num={btn} className ="button" value={btn}
                                                                     onClick={ function(e){ numClickHandler(e); } }
                                                />
                                            </span>
@@ -300,7 +296,7 @@ function Calculator() {
 
                                     {
                                         equalSign.map( (eq,i) =>
-                                            <MagnificientEqualButton key={i} className ="button-eq" equalSign={eq}
+                                            <MagnificientEqualButton key={i*3} className ="button-eq" equalSign={eq}
                                                                      onClick={ function(e){ equalClickHandler(e); collectCount(e); } }
                                             />
                                         )
