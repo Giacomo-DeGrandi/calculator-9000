@@ -186,7 +186,6 @@ function Calculator() {
     })
         .then(r => r.json())
         .then(d => {
-            let saveCont = document.querySelector("#saveCont")
             let calcsCont = document.querySelector('#calcCont');
             calcsCont.innerHTML = ""
 
@@ -195,7 +194,6 @@ function Calculator() {
                 calcsC.innerHTML = d[i].calc
                 calcsCont.appendChild(calcsC)
             }
-            saveCont.appendChild(calcsCont)
 
         })
 
