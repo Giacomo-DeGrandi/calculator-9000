@@ -11,11 +11,7 @@ Abstract Class Database{
     function connect()
     {
 
-        /*
-        $server="localhost:3306";
-        $username="digitree";
-        $password="@LaPlateforme92.@";
-        $database="carlo-de-grandi-giacomo_little_discord";*/
+
 
         $server="localhost";
         $username="root";
