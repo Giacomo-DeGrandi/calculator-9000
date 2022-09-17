@@ -18,8 +18,11 @@ function Calculator() {
         const btns = ["+", "-", "/", "*"]
         const equalSign = ["="]
 
+    const saveBtn = document.createElement('button');
 
-        // UseSTATE ------------------------------------>
+
+
+    // UseSTATE ------------------------------------>
 
          let [calc, setCalc] = useState({
                 sign: "",
@@ -101,38 +104,60 @@ function Calculator() {
         };
 
 
-        const collectCount = (e) => {
-            let secondNum = document.querySelector("#num1").innerHTML
-            let sign = document.querySelector("#sign").innerHTML
-            let firstNum = document.querySelector("#num2").innerHTML
 
-            let compCalc = firstNum + ' ' + sign + ' ' + secondNum + ' = '
 
-            let calcData = new FormData();
+    const collectCount = (e) => {
+        let secondNum = document.querySelector("#num1").innerHTML
+        let sign = document.querySelector("#sign").innerHTML
+        let firstNum = document.querySelector("#num2").innerHTML
+        let expr = document.querySelector("#expr")
+        let saveCont = document.querySelector("#saveCont")
 
-            calcData.append('calcSave', compCalc );
+        let compCalc = firstNum + ' ' + sign + ' ' + secondNum + ' = '
 
-            fetch("http://localhost:8000/save.php", {
-                method: 'POST',
-                body: calcData,
-                headers : {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;application/json',
-                    'Accept': 'application/x-www-form-urlencoded; charset=UTF-8;application/json'
+        fetch("http://localhost:80/php/index.php", {
+            method: 'POST',
+            body: compCalc,
+            redirect: 'follow',
+            headers : {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8; application/json',
+                'Accept': 'application/x-www-form-urlencoded; charset=UTF-8; application/json'
+            }
+
+        })
+            .then(r => r.json())
+            .then(d => {
+                expr.innerHTML = d
+
+                saveCont.appendChild(saveBtn)
+                saveBtn.setAttribute("value", "save")
+                saveBtn.innerHTML = "SAVE"
+                saveBtn.setAttribute("type", "submit")
+                saveBtn.addEventListener('click', function(e) {saveCalc(e)} )
+                const saveCalc = (e) => {
+                    saveBtn.style.display = "none"
+
+                    fetch("http://localhost:80/php/SaveController.php", {
+                        method: 'POST',
+                        body: d,
+                        redirect: 'follow',
+                        headers : {
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8; application/json',
+                            'Accept': 'application/x-www-form-urlencoded; charset=UTF-8; application/json'
+                        }
+
+                    })
+                        .then(r => r.json())
+                        .then(d => {
+                            console.log(d);
+                        })
+
+
                 }
 
             })
-                .then(r => r.json())
-                .then(d => {
-                    console.log(d)
-                })
 
-        }
-
-
-        const saveCalc = (e) => {
-            let compCalc = document.querySelector("#myScreen").innerHTML
-             console.log(compCalc)
-        }
+    }
 
         // UseEFFECT ------------------------------------>
 
@@ -177,10 +202,10 @@ function Calculator() {
     const Reminder = {
         marginTop:"15vh",
         textAlign: "center",
-        border: "solid 1px white",
-        fontSize: "2em",
+        fontSize: "3em",
         padding: "2.5vh",
-        marginLeft:"4vh"
+        marginLeft:"4vh",
+        marginRight:"40vh"
 
     }
 
@@ -198,7 +223,8 @@ function Calculator() {
         boxShadow: "rgba(100, 100, 111, 0.2) 0 7px 29px 0"
     }
 
-    const saveBtn = {
+    /*
+    const saveBtnStyle = {
         textAlign: "center",
         width: "50vh",
         marginTop:"8vh",
@@ -209,9 +235,11 @@ function Calculator() {
         fontSize: "2em",
         border: "solid 1px white",
         borderRadius: "5vh",
-        backgroundColor:" white",
-        boxShadow: "rgba(100, 100, 111, 0.2) 0 7px 29px 0"
+        backgroundColor:" gray",
+        boxShadow: "rgba(100, 100, 111, 0.2) 0 7px 29px 0",
     }
+
+     */
 
 
 
@@ -237,16 +265,22 @@ function Calculator() {
 
 
     const mainFlex = {
-        display: "flex"
+        display: "flex",
+        justifyContent: "center"
     }
 
     const remFlex = {
-        display: "flex"
+        display: "none"
     }
 
     const colFlex = {
-        flexDirection: "column"
+        flexDirection: "column",
+        textAlign : "center"
     }
+    const wider = {
+        width: "90%"
+    }
+
 
 
 
@@ -257,7 +291,7 @@ function Calculator() {
         return (
             <div style={mainFlex}>
 
-                <div>
+                <div style={wider}>
                     <div style={mainWrapper}>
                         <div id="divvi" style={nineTh}>
                             <ItsOverNineThousand />
@@ -319,10 +353,8 @@ function Calculator() {
                         <h1 style={Reminder} id="num1"> {calc.num} </h1>
                     </div>
 
-                    <div>
-                        <button type="submit" name="save" style ={saveBtn} onClick={function(e){ saveCalc( e );  } } >
-                            SAVE
-                        </button>
+                    <div id="saveCont">
+                        <h1 style={Reminder} id="expr"> {calc.num} </h1>
                     </div>
 
                 </div>
