@@ -107,6 +107,9 @@ function Calculator() {
 
 
     const collectCount = (e) => {
+
+        e.preventDefault();
+
         let secondNum = document.querySelector("#num1").innerHTML
         let sign = document.querySelector("#sign").innerHTML
         let firstNum = document.querySelector("#num2").innerHTML
@@ -149,7 +152,14 @@ function Calculator() {
                     })
                         .then(r => r.json())
                         .then(d => {
-                            console.log(d);
+                            let saved = document.createElement('h1');
+                            saved.innerHTML = d
+                            saveCont.innerHTML = ""
+                            saveCont.appendChild(saved)
+
+                            setTimeout(() => {
+                                saved.style.display = 'none';
+                            }, 3000);
                         })
 
 
@@ -158,6 +168,36 @@ function Calculator() {
             })
 
     }
+
+
+       // GETALL THE RECORDED CALCS
+
+
+
+    fetch("http://localhost:80/php/SaveController.php", {
+        method: 'POST',
+        body: "",
+        redirect: 'follow',
+        headers : {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8; application/json',
+            'Accept': 'application/x-www-form-urlencoded; charset=UTF-8; application/json'
+        }
+
+    })
+        .then(r => r.json())
+        .then(d => {
+            let saveCont = document.querySelector("#saveCont")
+            let calcsCont = document.querySelector('#calcCont');
+            calcsCont.innerHTML = ""
+
+            for(let i = 0 ; i < d.length ;  i++ ){
+                let calcsC = document.createElement('h2');
+                calcsC.innerHTML = d[i].calc
+                calcsCont.appendChild(calcsC)
+            }
+            saveCont.appendChild(calcsCont)
+
+        })
 
         // UseEFFECT ------------------------------------>
 
@@ -355,6 +395,9 @@ function Calculator() {
 
                     <div id="saveCont">
                         <h1 style={Reminder} id="expr"> {calc.num} </h1>
+                    </div>
+                    <div id="calcCont">
+                        <h1>  </h1>
                     </div>
 
                 </div>

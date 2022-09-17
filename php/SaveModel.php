@@ -16,11 +16,10 @@ class Save extends Database
         return true;
     }
 
-    public function getAll()
+    public function getAll(): bool|array
     {
-        $sql= 'SELECT * FROM users WHERE email = :email ; ' ;
-        $params = [':email' => $email ];
-        $check = $this->selectQuery($sql,$params);
+        $sql= 'SELECT * FROM calc;' ;
+        $check = $this->selectQuery($sql);
         return $check->fetchAll();
     }
 }

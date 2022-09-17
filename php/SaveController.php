@@ -16,14 +16,6 @@ header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 
-    $x = $_POST;
-    $res = array_shift($x);
-    $x = array_flip($_POST);
-    $calc = array_shift($x);
-    $expr = $calc . '=' . $res;
-
-
-
 Class Save extends Database
 {
 
@@ -39,9 +31,28 @@ Class Save extends Database
 
 }
 
-$saveC = new Save;
-$saved = $saveC->saveCalc($expr);
-$calcs = $saveC->getAllCalc();
 
-print_r(json_encode($calcs));
+$saveC = new Save;
+
+
+if(!empty($_POST))
+{
+
+    $x = $_POST;
+    $res = array_shift($x);
+    $x = array_flip($_POST);
+    $calc = array_shift($x);
+    $expr = $calc . '=' . $res;
+
+    $saved = $saveC->saveCalc($expr);
+    print_r(json_encode("saved"));
+
+} else {
+    $calcs = $saveC->getAllCalc();
+    print_r(json_encode($calcs));
+}
+
+
+
+
 

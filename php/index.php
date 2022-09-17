@@ -44,6 +44,14 @@ print_r(json_encode($calcToBeSaved));
 
 
 /*
+ *  TO CHECK IF WORKS
+ *
+ *  USE    php -S localhost:<port number>
+ *  in the RootDirectory
+ *
+ *
+ *
+ *
 $numsArr = preg_split("/[+:\-*]+/", $x);
 $sign = preg_split("/[0-9.]+/", $x);
 $sign = $sign[1];
