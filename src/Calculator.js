@@ -118,10 +118,9 @@ function Calculator() {
 
         let compCalc = firstNum + ' ' + sign + ' ' + secondNum + ' = '
 
-        fetch("http://localhost:80/php/index.php", {
+        fetch("http://localhost:80/calculator-9000-master/php/index.php", {
             method: 'POST',
             body: compCalc,
-            redirect: 'follow',
             headers : {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8; application/json',
                 'Accept': 'application/x-www-form-urlencoded; charset=UTF-8; application/json'
@@ -140,10 +139,9 @@ function Calculator() {
                 const saveCalc = (e) => {
                     saveBtn.style.display = "none"
 
-                    fetch("http://localhost:80/php/SaveController.php", {
+                    fetch("http://localhost:80/calculator-9000-master/php/SaveController.php", {
                         method: 'POST',
                         body: d,
-                        redirect: 'follow',
                         headers : {
                             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8; application/json',
                             'Accept': 'application/x-www-form-urlencoded; charset=UTF-8; application/json'
@@ -174,10 +172,9 @@ function Calculator() {
 
 
 
-    fetch("http://localhost:80/php/SaveController.php", {
+    fetch("http://localhost:80/calculator-9000-master/php/SaveController.php", {
         method: 'POST',
         body: "",
-        redirect: 'follow',
         headers : {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8; application/json',
             'Accept': 'application/x-www-form-urlencoded; charset=UTF-8; application/json'

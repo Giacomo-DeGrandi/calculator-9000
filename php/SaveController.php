@@ -12,8 +12,7 @@ use php\SaveModel\Save as SaveM;
 header('application/x-www-form-urlencoded; charset=UTF-8; application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Credentials: true');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
+header('Access-Control-Allow-Headers: *');
 
 
 Class Save extends Database

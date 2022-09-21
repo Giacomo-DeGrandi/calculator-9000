@@ -11,8 +11,6 @@ Abstract Class Database{
     function connect()
     {
 
-
-
         $server="localhost";
         $username="root";
         $password="";
