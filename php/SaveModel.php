@@ -10,7 +10,7 @@ class Save extends Database
 {
     public function saveCalc($myCalc): bool|array
     {
-        $sql = 'INSERT INTO calc (`calc`) VALUES ( :calc ) ';
+        $sql = 'INSERT INTO calcs (`calc`) VALUES ( :calc ) ';
         $params = [':calc' => $myCalc];
         $check = $this->selectQuery($sql, $params);
         return true;
@@ -18,7 +18,7 @@ class Save extends Database
 
     public function getAll(): bool|array
     {
-        $sql= 'SELECT * FROM calc;' ;
+        $sql= 'SELECT * FROM calcs;' ;
         $check = $this->selectQuery($sql);
         return $check->fetchAll();
     }

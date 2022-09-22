@@ -154,6 +154,12 @@ function Calculator() {
                             saved.innerHTML = d
                             saveCont.innerHTML = ""
                             saveCont.appendChild(saved)
+                            let expr = document.createElement("h1")
+                            expr.setAttribute("id", 'expr')
+                            expr.setAttribute("style", 'Reminder')
+                            saveCont.appendChild(expr)
+
+
 
                             setTimeout(() => {
                                 saved.style.display = 'none';
@@ -310,10 +316,17 @@ function Calculator() {
 
     const colFlex = {
         flexDirection: "column",
-        textAlign : "center"
+        textAlign : "center",
+        alignItems: "center",
+        justifyContent: "center"
     }
     const wider = {
         width: "90%"
+    }
+    const saveCont = {
+        display: "flex",
+        flexDirection: "column",
+        padding: "4vh"
     }
 
 
@@ -388,10 +401,10 @@ function Calculator() {
                         <h1 style={Reminder} id="num1"> {calc.num} </h1>
                     </div>
 
-                    <div id="saveCont">
+                    <div id="saveCont" style={saveCont}>
                         <h1 style={Reminder} id="expr"> {calc.num} </h1>
                     </div>
-                    <div id="calcCont">
+                    <div id="calcCont" style={saveCont}>
                         <h1>  </h1>
                     </div>
 
